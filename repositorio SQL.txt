@@ -1,0 +1,38 @@
+
+//Lista de nome de filmes e atores principais(ord=1) nos quais Julie Andrews participou------------------------------------------
+
+SELECT title,name FROM
+ casting JOIN movie on (movieid=movie.id
+                        and ord = 1)
+         JOIN actor on (actorid=actor.id)
+  WHERE movie.id IN 
+   (select movieid FROM casting WHERE
+    actorid = (Select id from actor where name = 'Julie Andrews'))
+
+//Lista de atores com pelo menos 15 papeis principais----------------------------------------------------------------------------
+
+SELECT name FROM actor JOIN casting ON 
+(actorid=actor.id) AND ord=1
+  GROUP BY name HAVING count(actorid) >= 15
+
+//Numeros de atores em filmes lançados em 1978 (ordenaçao de numero de atores Descrescente e titulo Crescente)-------------------
+
+SELECT movie.title, count(casting.actorid) FROM movie JOIN casting ON (movie.id=movieid) WHERE movie.yr = 1978
+GROUP BY movie.title 
+ORDER BY count(casting.actorid) DESC, movie.title ASC
+
+//Atores que atuaram com Art Garfunkel-------------------------------------------------------------------------------------------
+
+SELECT distinct name FROM 
+ actor JOIN casting ON (actorid=actor.id) 
+  WHERE movieid IN
+   (SELECT movieid FROM casting WHERE actorid=
+    (SELECT id FROM actor WHERE name = 'Art Garfunkel'))
+  AND name != 'Art Garfunkel'
+
+//Categorizando com CASE --------------------------------------------------------------------------------------------------------
+SELECT name, 
+       CASE WHEN dept = 1 OR dept = 2 THEN 'Sci'
+            ELSE 'Art'
+            END AS Cat
+ FROM teacher
