@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiros passos com o DOM</title>
+    <style>
+        body{
+            background: rgb(212, 214, 66);
+            color: rgb(219, 9, 9);
+            font: normal 20pt Arial;
+        }
+    </style>
+</head>
+<body>
+
+
+ <h1>Estudos com o DOM</h1>
+ <p class = 'par0'>Paragrafo 1 - Ola tudo bem</p>
+ <p id = 'par1'>Parag 2 - Aprendendo a usar o <strong>DOM</strong> em JS</p>
+ <div>Clique aqui</div>
+ <p> Como selecionar elementos?</p>
+
+ <script>
+   
+     var documento = window.document.body
+     var p1 = window.document.getElementsByTagName('p')[1]//pegou o segundo paragrafo, pega somente um paragrafo por vez
+     var p0 = window.document.getElementsByTagName('p')[0]
+     window.document.write("Pegou o paragrafo 1 sem formatação: " + p0.innerText)
+
+     window.document.write('<br> Para pegar a formatação HTML: ' + p1.innerHTML)
+   documento.style.color = 'blue'
+    var select = window.document.querySelector('p#par1') //ID se seleciona por hashtag
+    var select1 = window.document.querySelector('p.par0')//class por ponto.
+
+    select.style.color = 'red';
+    select1.style.background = 'green'
+ </script>
+
+</body>
+</html>
